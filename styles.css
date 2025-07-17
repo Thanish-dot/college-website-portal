@@ -279,7 +279,7 @@ footer {
 }
 #index,section.hero{
       /* REPLACE THIS WITH YOUR IMAGE */
-        background-image: url('/images/project-background.jpg');  /* <-- Your image here */
+        background-image: url('./images/project-background.jpg');  /* <-- Your image here */
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
