@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty & Staff | SNSCT Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Faculty Page Specific Styles */
+        .faculty-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('images/faculty-banner.jpg') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .faculty-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .faculty-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .faculty-img-container {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .faculty-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .faculty-card:hover .faculty-img {
+            transform: scale(1.05);
+        }
+        
+        .faculty-info {
+            padding: 25px;
+        }
+        
+        .faculty-name {
+            color: #1e40af;
+            margin-bottom: 5px;
+            font-size: 1.4rem;
+        }
+        
+        .faculty-position {
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .faculty-qualification, 
+        .faculty-expertise {
+            color: #64748b;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .department-section {
+            margin-bottom: 60px;
+        }
+        
+        .department-title {
+            color: #1e293b;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+        
+        .staff-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .staff-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .staff-position {
+            color: #3b82f6;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        .staff-card i {
+            color: #64748b;
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .faculty-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.staff-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.staff-card:hover {
+  transform: translateY(-5px);
+}
+
+.staff-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-bottom: 3px solid #1e40af;
+}
+
+.staff-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.staff-info h3 {
+  color: #1e40af;
+  margin-bottom: 5px;
+}
+
+.staff-info p {
+  color: #64748b;
+  font-weight: 500;
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/college-logo.png" alt="SNSCT Logo" width="50">
+                <h1>SNSCT Portal</h1>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="student-life.html">Student Life</a></li>
+                    <li class="active"><a href="faculty-staff.html">Faculty & Staff</a></li>
+                    <li><a href="alumni.html">Alumni</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Faculty & Staff Hero Section -->
+    <section class="faculty-hero">
+        <div class="container">
+            <h1>Our Distinguished Faculty & Staff</h1>
+            <p>Meet our team of accomplished educators and dedicated administrative professionals</p>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section class="faculty-section">
+        <div class="container">
+            <h2 class="section-title">Teaching Faculty</h2>
+            
+            <!-- Computer Science Department -->
+            <div class="department-section">
+                <h3 class="department-title">Computer Science Department</h3>
+                <div class="faculty-grid">
+                    <div class="faculty-card">
+                        <div class="faculty-img-container">
+                           <img src="https://thispersondoesnotexist.com/" alt="Professor John Smith" class="staff-img">
+                        </div>
+                        <div class="faculty-info">
+                            <h3 class="faculty-name">Dr. John Smith</h3>
+                            <p class="faculty-position">Professor & HOD</p>
+                            <p class="faculty-qualification">PhD in Computer Science, Stanford University</p>
+                            <p class="faculty-expertise">Expertise: Artificial Intelligence, Machine Learning</p>
+                            <a href="faculty-profile.html?id=jsmith" class="btn btn-outline">View Profile</a>
+                        </div>
+                    </div>
+                    
+                    <div class="faculty-card">
+                        <div class="faculty-img-container">
+                             <img src="https://thispersondoesnotexist.com/" alt="Professor Sarah Johnson" class="staff-img">
+                        </div>
+                        <div class="faculty-info">
+                            <h3 class="faculty-name">Dr. Sarah Johnson</h3>
+                            <p class="faculty-position">Associate Professor</p>
+                            <p class="faculty-qualification">PhD in Data Science, MIT</p>
+                            <p class="faculty-expertise">Expertise: Big Data Analytics, Cloud Computing</p>
+                            <a href="faculty-profile.html?id=sjohnson" class="btn btn-outline">View Profile</a>
+                        </div>
+                    </div>
+                    
+                    <div class="faculty-card">
+                        <div class="faculty-img-container">
+                                <img src="https://thispersondoesnotexist.com/" alt="Professor Michael Chen" class="staff-img">
+                        </div>
+                        <div class="faculty-info">
+                            <h3 class="faculty-name">Prof. Michael Chen</h3>
+                            <p class="faculty-position">Assistant Professor</p>
+                            <p class="faculty-qualification">MS in Software Engineering, Carnegie Mellon</p>
+                            <p class="faculty-expertise">Expertise: Software Development, Cybersecurity</p>
+                            <a href="faculty-profile.html?id=mchen" class="btn btn-outline">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Electronics Department -->
+            <div class="department-section">
+                <h3 class="department-title">Electronics & Communication</h3>
+                <div class="faculty-grid">
+                    <div class="faculty-card">
+                        <div class="faculty-img-container">
+                             <img src="https://thispersondoesnotexist.com/" alt="Professor Priya Sharma" class="staff-img">
+                        </div>
+                        <div class="faculty-info">
+                            <h3 class="faculty-name">Dr. Priya Sharma</h3>
+                            <p class="faculty-position">Professor & HOD</p>
+                            <p class="faculty-qualification">PhD in Electronics, IIT Delhi</p>
+                            <p class="faculty-expertise">Expertise: VLSI Design, Embedded Systems</p>
+                            <a href="faculty-profile.html?id=psharma" class="btn btn-outline">View Profile</a>
+                        </div>
+                    </div>
+                    
+                    <div class="faculty-card">
+                        <div class="faculty-img-container">
+                            <img src="images/faculty/rajesh-kumar.jpg" alt="Dr. Rajesh Kumar" class="faculty-img">
+                        </div>
+                        <div class="faculty-info">
+                            <h3 class="faculty-name">Dr. Rajesh Kumar</h3>
+                            <p class="faculty-position">Associate Professor</p>
+                            <p class="faculty-qualification">PhD in Communication Systems, NIT Trichy</p>
+                            <p class="faculty-expertise">Expertise: Wireless Communication, 5G Networks</p>
+                            <a href="faculty-profile.html?id=rkumar" class="btn btn-outline">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View All Faculty Button -->
+            <div class="text-center">
+                <a href="faculty-directory.html" class="btn btn-primary">View All Faculty Members</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="staff-section bg-light">
+        <div class="container">
+            <h2 class="section-title">Administrative Staff</h2>
+            
+            <div class="staff-list">
+                <div class="staff-card">
+                    <h3>Robert Wilson</h3>
+                    <p class="staff-position">Registrar</p>
+                    <p><i class="fas fa-envelope"></i> registrar@snsct.edu</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                </div>
+                
+                <div class="staff-card">
+                    <h3>Jennifer Adams</h3>
+                    <p class="staff-position">Dean of Students</p>
+                    <p><i class="fas fa-envelope"></i> dean.students@snsct.edu</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43211</p>
+                </div>
+                
+                <div class="staff-card">
+                    <h3>David Miller</h3>
+                    <p class="staff-position">Head Librarian</p>
+                    <p><i class="fas fa-envelope"></i> library@snsct.edu</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43212</p>
+                </div>
+                
+                <div class="staff-card">
+                    <h3>Lisa Thompson</h3>
+                    <p class="staff-position">Admissions Officer</p>
+                    <p><i class="fas fa-envelope"></i> admissions@snsct.edu</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43213</p>
+                </div>
+                
+                <div class="staff-card">
+                    <h3>Mark Davis</h3>
+                    <p class="staff-position">IT Department Head</p>
+                    <p><i class="fas fa-envelope"></i> it.support@snsct.edu</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43214</p>
+                </div>
+                
+                <div class="staff-card">
+                    <h3>Sarah Johnson</h3>
+                    <p class="staff-position">HR Manager</p>
+                    <p><i class="fas fa-envelope"></i> hr@snsct.edu</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43215</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="faculty-staff.html">Faculty & Staff</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 College Road, Coimbatore</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-envelope"></i> info@snsct.edu</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 SNS College of Technology. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
