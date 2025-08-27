@@ -1,157 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNSCT College Portal - Home</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCE College Portal - Home</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+    }
+
+    header {
+      background-color: #1a3db6;
+      padding: 13px 25px;
+    }
+
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      color: #fff;
+    }
+
+    .logo-text span:first-child {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo-text span:last-child {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 23px;
+      flex-wrap: nowrap;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      white-space: nowrap;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 1000px) {
+      nav ul {
+        gap: 15px;
+      }
+
+      .logo-text span:first-child {
+        font-size: 16px;
+      }
+
+      .logo-text span:last-child {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 10px;
+        padding-top: 10px;
+      }
+    }
+
+    /* Slider Container */
+    .hero-section {
+      position: relative;
+      height: 70vh;
+      overflow: hidden;
+      color: white;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      /* space between Apply Now & Explore Programs */
+      justify-content: center;
+      /* keeps them centered */
+      flex-wrap: wrap;
+      /* makes them wrap on smaller screens */
+    }
+
+    .hero-buttons .btn {
+      text-decoration: none;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .btn.primary {
+      background-color: #3b82f6;
+      border: 2px solid #3b82f6;
+    }
+
+    .btn.secondary {
+      background-color: transparent;
+      border: 2px solid white;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 70vh;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Navigation Buttons */
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      padding: 12px;
+      cursor: pointer;
+      font-size: 24px;
+      border-radius: 50%;
+      z-index: 5;
+    }
+
+    .prev {
+      left: 15px;
+    }
+
+    .next {
+      right: 15px;
+    }
+
+    .slider-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Overlay Content */
+    .hero-content-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* Applies to both headings */
+    .section-title {
+      font-size: 30px;
+      font-weight: bolder;
+      color: #1e3a8a;
+      margin-bottom: 15px;
+      padding-left: 20px;
+      /* pushes text right */
+      border-left: 4px solid #3b82f6;
+      /* optional nice visual line */
+    }
+
+    /* Logo dropdown styling */
+    .logo-dropdown {
+      display: none;
+      position: absolute;
+      top: 70px;
+      /* below logo */
+      left: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 8px;
+      border-radius: 5px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    .logo-dropdown a {
+      display: block;
+      padding: 6px 10px;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .logo-dropdown a:hover {
+      background: #1a3db6;
+      color: white;
+      /* ================= Media Queries ================= */
+
+      /* Large screens / small desktops */
+      @media (max-width: 1200px) {
+        .hero-section {
+          height: 60vh;
+        }
+
+        .hero-content-overlay h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-content-overlay p {
+          font-size: 1.1rem;
+          max-width: 650px;
+        }
+
+        .section-title {
+          font-size: 28px;
+        }
+      }
+
+      /* Medium screens / tablets */
+      @media (max-width: 992px) {
+        .hero-section {
+          height: 55vh;
+        }
+
+        .hero-content-overlay h1 {
+          font-size: 2.2rem;
+        }
+
+        .hero-content-overlay p {
+          font-size: 1rem;
+          max-width: 500px;
+        }
+
+        .card-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+        }
+      }
+
+      /* Small tablets / large phones */
+      @media (max-width: 768px) {
+        .header-container {
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+        }
+
+        nav ul {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+          padding-top: 10px;
+        }
+
+        .hero-section {
+          height: 50vh;
+          padding: 10px;
+        }
+
+        .hero-content-overlay h1 {
+          font-size: 1.8rem;
+        }
+
+        .hero-content-overlay p {
+          font-size: 0.95rem;
+          max-width: 400px;
+        }
+
+        .hero-buttons {
+          gap: 10px;
+        }
+
+        .section-title {
+          font-size: 24px;
+        }
+      }
+
+
+      /* Mobile phones */
+      @media (max-width: 576px) {
+        .hero-section {
+          height: 45vh;
+        }
+
+        .hero-content-overlay h1 {
+          font-size: 1.5rem;
+        }
+
+        .hero-content-overlay p {
+          font-size: 0.9rem;
+          max-width: 300px;
+        }
+
+        .btn {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+
+        .card-content h3 {
+          font-size: 1.1rem;
+        }
+
+        .card-content p {
+          font-size: 0.85rem;
+        }
+
+        .section-title {
+          font-size: 20px;
+        }
+      }
+
+      /* Extra small phones */
+      @media (max-width: 400px) {
+        .hero-section {
+          height: 40vh;
+        }
+
+        .hero-content-overlay h1 {
+          font-size: 1.3rem;
+        }
+
+        .hero-content-overlay p {
+          font-size: 0.8rem;
+          max-width: 250px;
+        }
+
+        .btn {
+          padding: 8px 16px;
+          font-size: 0.8rem;
+        }
+
+        .card-content h3 {
+          font-size: 1rem;
+        }
+
+        .card-content p {
+          font-size: 0.75rem;
+        }
+
+        .section-title {
+          font-size: 18px;
+          padding-left: 10px;
+        }
+      }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 480px) {
+      .hero-section {
+        height: 40vh;
+      }
+
+      .hero-content-overlay h1 {
+        font-size: 1.3rem;
+      }
+
+      .hero-content-overlay p {
+        font-size: 0.8rem;
+        max-width: 250px;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+      }
+
+      .card-content h3 {
+        font-size: 1rem;
+      }
+
+      .card-content p {
+        font-size: 0.75rem;
+      }
+
+      .section-title {
+        font-size: 18px;
+        padding-left: 10px;
+      }
+    }
+
+    /* Desktop nav */
+    nav ul {
+      display: flex;
+      /* always visible on desktop */
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Hamburger hidden on desktop */
+    #hamburger {
+      display: none;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+
+      /* Hamburger visible */
+      #hamburger {
+        display: block;
+      }
+
+      /* Hide menu by default */
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+        background-color: #1a3db6;
+        padding: 10px 0;
+      }
+
+      /* Show menu when active */
+      nav ul.active {
+        display: flex;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <img src="https://placehold.co/50x50/1e40af/FFFFFF?text=SNS" alt="SNSCT Logo">
-                <h1>SNSCT Portal</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="admissions.html">Admissions</a></li>
-                    <li><a href="academics.html">Academics</a></li>
-                    <li><a href="achievements.html">Achievements</a></li>
-                    <li><a href="student-life.html">Student Life</a></li>
-                    <li><a href="faculty-staff.html">Faculty & Staff</a></li>
-                    <li><a href="alumni.html">Alumni</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </nav>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <div class="logo" id="logoMenuToggle">
+        <img src="./images/college logo.png" alt="SCE" />
+        <div class="logo-text">
+          <span>SCE</span>
+          <span>Portal</span>
         </div>
-    </header>
+      </div>
+      <div id="hamburger">&#9776;</div> <!-- Hamburger icon -->
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h2>Empowering Futures Through Education</h2>
-            <p>Welcome to SNS College of Technology - A premier institution dedicated to academic excellence, innovation, and holistic development.</p>
-            <div class="btn-container">
-                <a href="admissions.html" class="btn">Apply Now</a>
-                <a href="academics.html" class="btn btn-secondary">Explore Programs</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Announcements Section -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Latest Announcements</h2>
-            <div class="card-container">
-                <div class="card">
-                    <img src="https://placehold.co/600x400/1e40af/FFFFFF?text=Admissions" alt="Admissions">
-                    <div class="card-content">
-                        <h3>Admissions Open 2024</h3>
-                        <p>Applications for the 2024-25 academic year are now open. Apply before July 31st.</p>
-                        <a href="admissions.html" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://placehold.co/600x400/1e3a8a/FFFFFF?text=Tech+Fest" alt="Tech Fest">
-                    <div class="card-content">
-                        <h3>Annual Tech Fest</h3>
-                        <p>Join us for our biggest technology festival with workshops, competitions and more.</p>
-                        <a href="student-life.html" class="btn">View Details</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://placehold.co/600x400/3b82f6/FFFFFF?text=Research" alt="Research">
-                    <div class="card-content">
-                        <h3>Research Grants</h3>
-                        <p>Applications open for student research grants. Deadline: August 15th.</p>
-                        <a href="academics.html" class="btn">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="admissions.html" class="active">Admissions</a></li>
+          <li><a href="academics.html">Academics</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="tie-ups.html">Tie-Up</a></li>
+          <li><a href="faculty-staff.html">Faculty & Staff</a></li>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
 
-    <!-- Quick Links Section -->
-    <section class="section bg-light">
-        <div class="container">
-            <h2 class="section-title">Quick Links</h2>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-content">
-                        <i class="fas fa-calendar-alt fa-3x" style="color: var(--primary); margin-bottom: 15px;"></i>
-                        <h3>Academic Calendar</h3>
-                        <p>View important dates and events for the current academic year.</p>
-                        <a href="#" class="btn">View Calendar</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <i class="fas fa-book fa-3x" style="color: var(--primary); margin-bottom: 15px;"></i>
-                        <h3>Library</h3>
-                        <p>Access our digital library resources and catalog.</p>
-                        <a href="#" class="btn">Visit Library</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <i class="fas fa-graduation-cap fa-3x" style="color: var(--primary); margin-bottom: 15px;"></i>
-                        <h3>Student Portal</h3>
-                        <p>Login to access your academic records and resources.</p>
-                        <a href="#" class="btn">Student Login</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- HIDDEN DROPDOWN MENU -->
+    <div class="logo-dropdown" id="logoDropdown">
+      <a href="admissions.html">Admissions</a>
+      <a href="academics.html">Academics</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </header>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-container">
-                <div class="footer-column">
-                    <h3>About SNSCT</h3>
-                    <p>SNS College of Technology is committed to providing quality education and fostering innovation.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="admissions.html">Admissions</a></li>
-                        <li><a href="academics.html">Academics</a></li>
-                        <li><a href="student-life.html">Student Life</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="#">Library</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Research</a></li>
-                        <li><a href="#">Alumni</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 College Road, Coimbatore</p>
-                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
-                    <p><i class="fas fa-envelope"></i> info@snsct.edu</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2024 SNS College of Technology. All Rights Reserved.</p>
-            </div>
+
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <!-- Slides Container -->
+    <div class="slides">
+      <div class="slide"><img src="./images/project-background.jpg" alt="Campus"></div>
+      <div class="slide"><img src="./images/library.jpg" alt="Library"></div>
+      <div class="slide"><img src="./images/student 2.jpg" alt="Students"></div>
+    </div>
+
+    <!-- Slider Navigation Arrows -->
+    <button class="slider-btn prev">&#10094;</button>
+    <button class="slider-btn next">&#10095;</button>
+
+    <!-- Overlay Text -->
+    <div class="hero-content-overlay">
+      <h1>Empowering Futures Through Education</h1>
+      <p>Welcome to Stravion College of Engineering - A premier institution dedicated to academic excellence,
+        innovation, and holistic development.</p>
+      <div class="hero-buttons">
+        <a href="admissions.html" class="btn primary">Apply Now</a>
+        <a href="academics.html" class="btn secondary">Explore Programs</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Animated Admissions News Headline -->
+  <h2 class="section-title" style="text-align:center; margin-bottom:20px; color:#1a3db6;">
+    📰 Admissions News
+  </h2>
+
+  <div
+    style="overflow:hidden; background:#fff; border:1px solid #ccc; border-radius:5px; padding:10px 0; margin-bottom:40px;">
+    <div class="news-ticker"
+      style="display:inline-block; white-space:nowrap; animation: ticker 15s linear infinite; font-size:1.1rem;">
+      📢 Admissions for the academic year 2024–25 are now open &nbsp; | &nbsp;
+      🎓 Special scholarships for meritorious students scoring above 90% &nbsp; | &nbsp;
+      🏛 Government quota seats available as per Tamil Nadu norms &nbsp; | &nbsp;
+      🏠 Hostel booking open for first-year students
+    </div>
+  </div>
+
+  <!-- Announcements Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Latest Announcements</h2>
+      <div class="card-container">
+        <div class="card">
+          <img src="https://placehold.co/600x400/1e40af/FFFFFF?text=Admissions" alt="Admissions">
+          <div class="card-content">
+            <h3>Admissions Open 2024</h3>
+            <p>Applications for the 2024-25 academic year are now open. Apply before July 31st.</p>
+            <a href="admissions.html" class="btn">Learn More</a>
+          </div>
         </div>
-    </footer>
+        <div class="card">
+          <img src="https://placehold.co/600x400/1e3a8a/FFFFFF?text=Tech+Fest" alt="Tech Fest">
+          <div class="card-content">
+            <h3>Annual Tech Fest</h3>
+            <p>Join us for our biggest technology festival with workshops, competitions and more.</p>
+            <a href="events.html" class="btn">View Details</a>
+
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://placehold.co/600x400/3b82f6/FFFFFF?text=Research" alt="Research">
+          <div class="card-content">
+            <h3>Research Grants</h3>
+            <p>Applications open for student research grants. Deadline: August 15th.</p>
+            <a href="reserch.html" class="btn">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Admissions News & Fee Structure Section -->
+  <section class="section" style="background-color:#f8f9fa; padding: 40px 20px;">
+    <div class="container">
+      <!-- Fee Structure -->
+      <h2 class="section-title" style="text-align:center; margin-bottom:20px; color:#1a3db6;">
+        💰 Fee Structure (2024–25)
+      </h2>
+      <div style="overflow-x:auto;">
+        <table
+          style="width:100%; border-collapse: collapse; margin-bottom:30px; background:#fff; border:1px solid #ccc;">
+          <thead style="background:#1a3db6; color:#fff;">
+            <tr>
+              <th style="padding:12px; border:1px solid #ccc;">Category</th>
+              <th style="padding:12px; border:1px solid #ccc;">Tuition Fee (per year)</th>
+              <th style="padding:12px; border:1px solid #ccc;">Scholarship Preference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:12px; border:1px solid #ccc;">Government Quota</td>
+              <td style="padding:12px; border:1px solid #ccc;">₹50,000</td>
+              <td style="padding:12px; border:1px solid #ccc;">Up to 25% fee waiver for top scorers</td>
+            </tr>
+            <tr>
+              <td style="padding:12px; border:1px solid #ccc;">Management Quota</td>
+              <td style="padding:12px; border:1px solid #ccc;">₹85,000</td>
+              <td style="padding:12px; border:1px solid #ccc;">Up to 15% fee waiver for merit students</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Hostel Fees -->
+      <h3 style="text-align:center; color:#1a3db6;">🏠 Hostel Fee (per year)</h3>
+      <p style="text-align:center; font-size:1.1rem; margin-top:10px;">
+        ₹40,000 (includes accommodation & mess charges)
+        <br><small>* Separate hostels available for boys and girls.</small>
+      </p>
+    </div>
+  </section>
+
+
+
+  <!-- Quick Links Section -->
+  <section class="section bg-light">
+    <div class="container">
+      <h2 class="section-title">Quick Links</h2>
+      <div class="card-container">
+        <div class="card">
+          <div class="card-content">
+            <i class="fas fa-calendar-alt fa-3x" style="color: var(--primary); margin-bottom: 15px;"></i>
+            <h3>Academic Calendar</h3>
+            <p>View important dates and events for the current academic year.</p>
+            <a href="calendar.html" class="btn">View Calendar</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <i class="fas fa-book fa-3x" style="color: var(--primary); margin-bottom: 15px;"></i>
+            <h3>Library</h3>
+            <p>Access our digital library resources and catalog.</p>
+            <a href="library.html" class="btn">Visit Library</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <i class="fas fa-graduation-cap fa-3x" style="color: var(--primary); margin-bottom: 15px;"></i>
+            <h3>Student Portal</h3>
+            <p>Login to access your academic records and resources.</p>
+            <a href="login.html" class="btn">Student Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>About SNSCT</h3>
+          <p>Stravion College of Engineering is committed to providing quality education and fostering innovation.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="admissions.html">Admissions</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="student-life.html">Student Life</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Library</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Research</a></li>
+            <li><a href="#">Alumni</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> 123 College Road, Coimbatore</p>
+          <p><i class="fas fa-phone"></i> +91 9876543210</p>
+          <p><i class="fas fa-envelope"></i> info@sce.edu</p>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 Stravion College of Engineering. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- Dynamic Content Display Area -->
+  <div id="dynamic-content"
+    style="max-width: 900px; margin: 40px auto; padding: 20px; display: none; background: #f9f9f9; border-radius: 8px; border: 1px solid #ccc;">
+  </div>
+  <script src="index.js" defer></script>
+
 </body>
+
 </html>
