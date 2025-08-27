@@ -1,27 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNSCT College Portal - Academics</title>
+    <title>SCE College Portal - Academics</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        section.hero {
+
+            /* REPLACE THIS WITH YOUR IMAGE */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./images/academics.jpg');
+            /* <-- Your image here */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 8rem 0;
+            margin-bottom: 2rem;
+            /* Rest remains the same */
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h2 {
+            animation: slideUpFadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .hero p {
+            animation: slideUpFadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .btn-container {
+            animation: slideUpFadeIn 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes cardEntry {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .card {
+            animation: cardEntry 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* ================== Media Queries ================== */
+
+        /* Large tablets / small desktops */
+        @media (max-width: 1200px) {
+            .hero {
+                padding: 6rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .card-container {
+                gap: 20px;
+            }
+
+            .card img {
+                height: 180px;
+            }
+        }
+
+        /* Medium tablets */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .card img {
+                height: 160px;
+            }
+
+            .card-content h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Small tablets / large phones */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding-top: 10px;
+            }
+
+            .hero {
+                padding: 5rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+
+            .card img {
+                height: 140px;
+            }
+
+            .card-content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Mobile phones */
+        @media (max-width: 576px) {
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.85rem;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .card img {
+                height: 120px;
+            }
+
+            .card-content h3 {
+                font-size: 1rem;
+            }
+
+            .card-content p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 400px) {
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .hero p {
+                font-size: 0.75rem;
+            }
+
+            .card img {
+                height: 100px;
+            }
+
+            .card-content h3 {
+                font-size: 0.95rem;
+            }
+
+            .card-content p {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .hero p {
+                font-size: 0.75rem;
+            }
+
+            .card img {
+                height: 100px;
+            }
+
+            .card-content h3 {
+                font-size: 0.95rem;
+            }
+
+            .card-content p {
+                font-size: 0.7rem;
+            }
+        }
+        /* Desktop: show nav normally, hide hamburger */
+nav ul {
+  display: flex;
+  gap: 23px;
+}
+#hamburger {
+  display: none;
+}
+
+/* Hide the checkbox */
+#menu-toggle {
+  display: none;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  #hamburger {
+    display: block;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  nav ul {
+    display: none;       /* hide menu by default */
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  /* Show menu when checkbox is checked */
+  #menu-toggle:checked ~ nav ul {
+    display: flex;
+  }
+}
+
+    </style>
 </head>
-<body>
+
+<body class="academics-page">
     <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="https://placehold.co/50x50/1e40af/FFFFFF?text=SNS" alt="SNSCT Logo">
-                <h1>SNSCT Portal</h1>
+                <img src="./images/college logo.png" alt="SCE Logo">
+                <h1>SCE Portal</h1>
             </div>
+            <!-- Hidden checkbox -->
+            <input type="checkbox" id="menu-toggle" />
+
+            <!-- Hamburger icon -->
+            <label for="menu-toggle" id="hamburger">&#9776;</label>
+
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="admissions.html">Admissions</a></li>
                     <li><a href="academics.html" class="active">Academics</a></li>
-                    <li><a href="student-life.html">Student Life</a></li>
+                    <li><a href="achievements.html">Achievements</a></li>
+                    <li><a href="tie-ups.html">Tie-Up</a></li>
                     <li><a href="faculty-staff.html">Faculty & Staff</a></li>
                     <li><a href="alumni.html">Alumni</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
@@ -42,49 +338,74 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">Our Departments</h2>
-            
+
             <div class="card-container">
                 <div class="card">
                     <img src="https://placehold.co/600x400/1e40af/FFFFFF?text=CSE" alt="Computer Science">
                     <div class="card-content">
                         <h3>Computer Science & Engineering</h3>
-                        <p>Our CSE department offers cutting-edge programs in software development, AI, and data science.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <p>Our CSE department offers cutting-edge programs in software development, AI, and data
+                            science.</p>
+                        <a href="learnmore.html" class="btn">Learn More</a>
                     </div>
                 </div>
-                
+
+                <div class="card">
+                    <img src="https://placehold.co/600x400/3b82f6/FFFFFF?text=IT" alt="Mechanical">
+                    <div class="card-content">
+                        <h3>Information & Technology Engineering</h3>
+                        <p>An IT department within an engineering context focuses on the design, implementation, and
+                            maintenance of a company's technology infrastructure</p>
+                        <a href="learnmore.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+
                 <div class="card">
                     <img src="https://placehold.co/600x400/1e3a8a/FFFFFF?text=ECE" alt="Electronics">
                     <div class="card-content">
-                        <h3>Electronics & Communication</h3>
+                        <h3>Electronics & Communication Engineering</h3>
                         <p>Explore the world of electronics, communication systems, and embedded technologies.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <a href="learnmore.html" class="btn">Learn More</a>
                     </div>
                 </div>
-                
+
+
+                <div class="card">
+                    <img src="https://placehold.co/600x400/1e3a8a/FFFFFF?text=EEE" alt="Electronics">
+                    <div class="card-content">
+                        <h3> Electrical & Electronics Engineering</h3>
+                        <p>Our EEE Department focuses on the study and application of electricity, electronics, and
+                            electromagnetism</p>
+                        <a href="learnmore.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+
                 <div class="card">
                     <img src="https://placehold.co/600x400/3b82f6/FFFFFF?text=MECH" alt="Mechanical">
                     <div class="card-content">
                         <h3>Mechanical Engineering</h3>
                         <p>Learn about design, manufacturing, and automation in our mechanical programs.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <a href="learnmore.html" class="btn">Learn More</a>
                     </div>
                 </div>
-                
+
+
+
                 <div class="card">
                     <img src="https://placehold.co/600x400/1e40af/FFFFFF?text=MBA" alt="Management">
                     <div class="card-content">
                         <h3>School of Management</h3>
                         <p>Develop business acumen with our MBA programs in various specializations.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <a href="learnmore.html" class="btn">Learn More</a>
                     </div>
                 </div>
             </div>
-            
+
             <div style="margin-top: 50px; text-align: center;">
                 <h3 style="margin-bottom: 20px;">Academic Calendar</h3>
-                <p style="max-width: 800px; margin: 0 auto 30px;">Stay updated with important academic dates, holidays, and examination schedules.</p>
-                <a href="#" class="btn">View Academic Calendar</a>
+                <p style="max-width: 800px; margin: 0 auto 30px;">Stay updated with important academic dates, holidays,
+                    and examination schedules.</p>
+                <a href="calendar.html" class="btn">View Academic Calendar</a>
             </div>
         </div>
     </section>
@@ -94,8 +415,10 @@
         <div class="container">
             <div class="footer-container">
                 <div class="footer-column">
-                    <h3>About SNSCT</h3>
-                    <p>SNS College of Technology is committed to providing quality education and fostering innovation.</p>
+                    <h3>About SCE</h3>
+                    <p>Stravion College of Engineering is committed to providing quality education and fostering
+                        innovation.
+                    </p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -124,14 +447,8 @@
                 <div class="footer-column">
                     <h3>Contact Us</h3>
                     <p><i class="fas fa-map-marker-alt"></i> 123 College Road, Coimbatore</p>
-                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
-                    <p><i class="fas fa-envelope"></i> info@snsct.edu</p>
+                    <p><i class="fas fa-phone"></i> +91 63XXXXXX28</p>
+                    <p><i class="fas fa-envelope"></i> info@sce.edu</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2024 SNS College of Technology. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>

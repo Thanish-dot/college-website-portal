@@ -1,27 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNSCT College Portal - Contact Us</title>
+    <title>SCE College Portal - Contact Us</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        header {
+            background-color: #1a3db6;
+            padding: 13px 25px;
+        }
+
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            color: #ffffff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .logo-text span:first-child {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo-text span:last-child {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 23px;
+            flex-wrap: nowrap;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1000px) {
+            nav ul {
+                gap: 15px;
+            }
+
+            .logo-text span:first-child {
+                font-size: 16px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 10px;
+                padding-top: 10px;
+            }
+        }
+
+        section.hero {
+
+            /* REPLACE THIS WITH YOUR IMAGE */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./images/contact\ us.jpg');
+            /* <-- Your image here */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 8rem 0;
+            margin-bottom: 2rem;
+            /* Rest remains the same */
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h2 {
+            animation: slideUpFadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .hero p {
+            animation: slideUpFadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .btn-container {
+            animation: slideUpFadeIn 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes cardEntry {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .card {
+            animation: cardEntry 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* ================== Media Queries ================== */
+
+        /* Large tablets / small desktops */
+        @media (max-width: 1200px) {
+            .header-container {
+                padding: 0 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .logo-text span:first-child {
+                font-size: 20px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 15px;
+            }
+
+            section.hero {
+                padding: 6rem 0;
+            }
+        }
+
+        /* Medium tablets */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding-top: 10px;
+            }
+
+            section.hero h2 {
+                font-size: 2rem;
+            }
+
+            section.hero p {
+                font-size: 1rem;
+            }
+
+            .section>.container>div {
+                flex-direction: column;
+            }
+
+            .section>.container>div>div {
+                min-width: 100%;
+            }
+
+            iframe {
+                height: 350px;
+            }
+        }
+
+        /* Small tablets / large phones */
+        @media (max-width: 768px) {
+            .logo-text span:first-child {
+                font-size: 18px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 14px;
+            }
+
+            nav ul li a {
+                font-size: 16px;
+            }
+
+            section.hero {
+                padding: 5rem 0;
+                background-attachment: scroll;
+            }
+
+            form#contactForm {
+                padding: 20px;
+            }
+        }
+
+        /* Mobile phones */
+        @media (max-width: 576px) {
+            nav ul {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            section.hero h2 {
+                font-size: 1.5rem;
+            }
+
+            section.hero p {
+                font-size: 0.9rem;
+            }
+
+            form#contactForm input,
+            form#contactForm textarea {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+
+            form#contactForm button {
+                font-size: 1rem;
+            }
+
+            iframe {
+                height: 250px;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 400px) {
+            .logo-text span:first-child {
+                font-size: 16px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 12px;
+            }
+
+            nav ul li a {
+                font-size: 14px;
+            }
+
+            section.hero h2 {
+                font-size: 1.3rem;
+            }
+
+            section.hero p {
+                font-size: 0.8rem;
+            }
+
+            form#contactForm input,
+            form#contactForm textarea {
+                padding: 6px;
+                font-size: 0.8rem;
+            }
+
+            form#contactForm button {
+                font-size: 0.95rem;
+            }
+
+            iframe {
+                height: 200px;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            .logo-text span:first-child {
+                font-size: 16px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 12px;
+            }
+
+            nav ul li a {
+                font-size: 14px;
+            }
+
+            section.hero h2 {
+                font-size: 1.3rem;
+            }
+
+            section.hero p {
+                font-size: 0.8rem;
+            }
+
+            form#contactForm input,
+            form#contactForm textarea {
+                padding: 6px;
+                font-size: 0.8rem;
+            }
+
+            form#contactForm button {
+                font-size: 0.95rem;
+            }
+
+            iframe {
+                height: 200px;
+            }
+
+        }
+
+        /* Desktop nav */
+        nav ul {
+            display: flex;
+            /* always visible on desktop */
+            gap: 20px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hamburger hidden on desktop */
+        #hamburger {
+            display: none;
+            font-size: 28px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+
+            /* Hamburger visible */
+            #hamburger {
+                display: block;
+            }
+
+            /* Hide menu by default */
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                margin-top: 10px;
+                background-color: #1a3db6;
+                padding: 10px 0;
+            }
+
+            /* Show menu when active */
+            nav ul.active {
+                display: flex;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="https://placehold.co/50x50/1e40af/FFFFFF?text=SNS" alt="SNSCT Logo">
-                <h1>SNSCT Portal</h1>
+                <img src="./images/college logo.png" alt="SCE Logo">
+                <h1>SCE Portal</h1>
             </div>
+            <div id="hamburger">&#9776;</div> <!-- Hamburger icon -->
+
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="admissions.html">Admissions</a></li>
                     <li><a href="academics.html">Academics</a></li>
-                    <li><a href="student-life.html">Student Life</a></li>
+                    <li><a href="achievements.html">Achievements</a></li>
+                    <li><a href="tie-ups.html">Tie-Up</a></li>
                     <li><a href="faculty-staff.html">Faculty & Staff</a></li>
                     <li><a href="alumni.html">Alumni</a></li>
                     <li><a href="contact.html" class="active">Contact Us</a></li>
@@ -33,7 +461,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h2>Contact SNSCT</h2>
+            <h2>Contact Stravion College of Engineering</h2>
             <p>We're here to answer your questions and provide the information you need.</p>
         </div>
     </section>
@@ -44,69 +472,88 @@
             <div style="display: flex; flex-wrap: wrap; gap: 30px;">
                 <div style="flex: 1; min-width: 300px;">
                     <h2 class="section-title" style="text-align: left;">Get in Touch</h2>
-                    
+
                     <div style="margin-bottom: 30px;">
                         <h3 style="margin-bottom: 15px; color: var(--primary);">Main Campus</h3>
                         <p><i class="fas fa-map-marker-alt"></i> 123 College Road, Coimbatore, Tamil Nadu - 641035</p>
                         <p><i class="fas fa-phone"></i> +91 9876543210</p>
-                        <p><i class="fas fa-envelope"></i> info@snsct.edu</p>
+                        <p><i class="fas fa-envelope"></i> info@sce.edu</p>
                     </div>
-                    
+
                     <div style="margin-bottom: 30px;">
                         <h3 style="margin-bottom: 15px; color: var(--primary);">Admissions Office</h3>
                         <p><i class="fas fa-phone"></i> +91 9876543211</p>
-                        <p><i class="fas fa-envelope"></i> admissions@snsct.edu</p>
+                        <p><i class="fas fa-envelope"></i> admissions@sce.edu</p>
                     </div>
-                    
+
                     <div style="margin-bottom: 30px;">
                         <h3 style="margin-bottom: 15px; color: var(--primary);">Office Hours</h3>
                         <p>Monday to Friday: 9:00 AM - 5:00 PM</p>
                         <p>Saturday: 9:00 AM - 1:00 PM</p>
                         <p>Sunday: Closed</p>
                     </div>
-                    
+
                     <div>
                         <h3 style="margin-bottom: 15px; color: var(--primary);">Follow Us</h3>
                         <div style="display: flex; gap: 15px;">
-                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
-                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
-                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
-                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i
+                                    class="fab fa-facebook"></i></a>
+                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i
+                                    class="fab fa-linkedin"></i></a>
+                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i
+                                    class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
-                
+
                 <div style="flex: 1; min-width: 300px;">
                     <h2 class="section-title" style="text-align: left;">Send Us a Message</h2>
-                    <form style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <form id="contactForm"
+                        style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                         <div style="margin-bottom: 20px;">
-                            <label for="name" style="display: block; margin-bottom: 8px; font-weight: 600;">Your Name</label>
-                            <input type="text" id="name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                            <label for="name" style="display: block; margin-bottom: 8px; font-weight: 600;">Your
+                                Name</label>
+                            <input type="text" id="name" name="name" required
+                                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div style="margin-bottom: 20px;">
-                            <label for="email" style="display: block; margin-bottom: 8px; font-weight: 600;">Email Address</label>
-                            <input type="email" id="email" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                            <label for="email" style="display: block; margin-bottom: 8px; font-weight: 600;">Email
+                                Address</label>
+                            <input type="email" id="email" name="email" required
+                                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div style="margin-bottom: 20px;">
-                            <label for="subject" style="display: block; margin-bottom: 8px; font-weight: 600;">Subject</label>
-                            <input type="text" id="subject" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                            <label for="subject"
+                                style="display: block; margin-bottom: 8px; font-weight: 600;">Subject</label>
+                            <input type="text" id="subject" name="subject" required
+                                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div style="margin-bottom: 20px;">
-                            <label for="message" style="display: block; margin-bottom: 8px; font-weight: 600;">Message</label>
-                            <textarea id="message" rows="5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                            <label for="message"
+                                style="display: block; margin-bottom: 8px; font-weight: 600;">Message</label>
+                            <textarea id="message" name="message" rows="5" required
+                                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
                         </div>
                         <button type="submit" class="btn" style="width: 100%;">Send Message</button>
                     </form>
+
+                    <!-- Response text -->
+                    <div id="formResponse" style="margin-top: 15px; font-weight: bold; color: green;"></div>
+
                 </div>
             </div>
-            
+
             <div style="margin-top: 50px;">
                 <h2 class="section-title">Campus Location</h2>
-                <div style="height: 400px; background-color: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                    <!-- Placeholder for map -->
-                    <p style="font-size: 1.2rem; color: var(--text-light);">Map of SNSCT Campus Location</p>
-                </div>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.887483838112!2d77.00590937475708!3d11.101405889081146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba85700f2d78855%3A0xbfd40e48a26ed2c1!2sSNS%20College%20of%20Technology!5e0!3m2!1sen!2sin!4v1691432456789!5m2!1sen!2sin"
+                    width="100%" height="400" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </section>
@@ -117,7 +564,9 @@
             <div class="footer-container">
                 <div class="footer-column">
                     <h3>About SNSCT</h3>
-                    <p>SNS College of Technology is committed to providing quality education and fostering innovation.</p>
+                    <p>Stravion College of Engineering is committed to providing quality education and fostering
+                        innovation.
+                    </p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -150,10 +599,13 @@
                     <p><i class="fas fa-envelope"></i> info@snsct.edu</p>
                 </div>
             </div>
+
             <div class="copyright">
                 <p>&copy; 2024 SNS College of Technology. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
+    <script src="contact.js" defer></script>
 </body>
+
 </html>

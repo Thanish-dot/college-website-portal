@@ -1,178 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty & Staff | SNSCT Portal</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Faculty & Staff | SCE Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Faculty Page Specific Styles */
-        .faculty-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('images/faculty-banner.jpg') center/cover no-repeat;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
+        /* Body */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        header {
+            background-color: #1a3db6;
+            padding: 13px 25px;
+        }
+
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            color: #ffffff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .logo-text span:first-child {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo-text span:last-child {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 23px;
+            flex-wrap: nowrap;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1000px) {
+            nav ul {
+                gap: 15px;
+            }
+
+            .logo-text span:first-child {
+                font-size: 16px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 10px;
+                padding-top: 10px;
+            }
+        }
+
+        /* Faculty Hero Section */
+        .faculty-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('./images/faculty.png') center/cover no-repeat;
+            color: white;
+            position: sticky;
+        }
+
+        .faculty-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .faculty-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+
+        /* Faculty Container */
+        .faculty-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Department Title */
+        .department-section {
+            margin: 50px 0;
+        }
+
+        .department-title {
+            border-left: 5px solid #1e40af;
+            padding-left: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* Faculty Grid */
         .faculty-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
         }
-        
+
         .faculty-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
-        
+
         .faculty-card:hover {
             transform: translateY(-5px);
         }
-        
-        .faculty-img-container {
-            height: 300px;
-            overflow: hidden;
-        }
-        
-        .faculty-img {
+
+        .faculty-card img {
             width: 100%;
-            height: 100%;
+            height: 250px;
             object-fit: cover;
-            transition: transform 0.5s ease;
         }
-        
-        .faculty-card:hover .faculty-img {
-            transform: scale(1.05);
-        }
-        
+
         .faculty-info {
-            padding: 25px;
+            padding: 15px;
         }
-        
+
         .faculty-name {
+            font-size: 1.2rem;
+            font-weight: bold;
             color: #1e40af;
-            margin-bottom: 5px;
-            font-size: 1.4rem;
         }
-        
+
         .faculty-position {
             color: #3b82f6;
-            font-weight: 600;
-            margin-bottom: 15px;
+            font-weight: 500;
+            margin: 5px 0;
         }
-        
-        .faculty-qualification, 
-        .faculty-expertise {
-            color: #64748b;
-            margin-bottom: 10px;
-            line-height: 1.5;
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            margin-top: 10px;
+            background: #1e40af;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
         }
-        
-        .department-section {
-            margin-bottom: 60px;
+
+        .btn:hover {
+            background: #1e3a8a;
         }
-        
-        .department-title {
-            color: #1e293b;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
-            margin-bottom: 20px;
+
+        /* Modal */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
         }
-        
-        .staff-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+
+        /* Show Modal When Active */
+        .modal.active {
+            display: flex;
         }
-        
-        .staff-card {
+
+        .modal-content {
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            animation: fadeIn 0.3s ease;
         }
-        
-        .staff-position {
-            color: #3b82f6;
-            font-weight: 600;
-            margin: 10px 0;
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #555;
         }
-        
-        .staff-card i {
-            color: #64748b;
-            margin-right: 10px;
-            width: 20px;
+
+        .close-btn:hover {
+            color: #000;
         }
-        
-        @media (max-width: 768px) {
-            .faculty-grid {
-                grid-template-columns: 1fr;
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
             }
         }
-        .staff-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  margin: 40px 0;
-}
 
-.staff-card {
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-}
+        /* ================= Media Queries ================= */
 
-.staff-card:hover {
-  transform: translateY(-5px);
-}
+        /* Large tablets / small desktops */
+        @media (max-width: 1200px) {
+            .faculty-hero h1 {
+                font-size: 2.2rem;
+            }
 
-.staff-img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-bottom: 3px solid #1e40af;
-}
+            .faculty-hero p {
+                font-size: 1.1rem;
+                max-width: 600px;
+            }
+        }
 
-.staff-info {
-  padding: 20px;
-  text-align: center;
-}
+        /* Medium tablets */
+        @media (max-width: 992px) {
+            .faculty-hero h1 {
+                font-size: 2rem;
+            }
 
-.staff-info h3 {
-  color: #1e40af;
-  margin-bottom: 5px;
-}
+            .faculty-hero p {
+                font-size: 1rem;
+                max-width: 500px;
+            }
 
-.staff-info p {
-  color: #64748b;
-  font-weight: 500;
-}
+            .faculty-grid {
+                gap: 15px;
+            }
+        }
+
+        /* Small tablets / large phones */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                padding-top: 10px;
+            }
+
+            .faculty-hero {
+                padding: 15px;
+                min-height: 250px;
+            }
+
+            .faculty-hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .faculty-hero p {
+                font-size: 0.95rem;
+            }
+
+            .faculty-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 10px;
+            }
+
+            .faculty-card img {
+                height: 200px;
+            }
+        }
+
+        /* Mobile phones */
+        @media (max-width: 576px) {
+            .faculty-hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .faculty-hero p {
+                font-size: 0.9rem;
+            }
+
+            .faculty-card img {
+                height: 180px;
+            }
+
+            .faculty-info {
+                padding: 10px;
+            }
+
+            .faculty-name {
+                font-size: 1.1rem;
+            }
+
+            .faculty-position {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 400px) {
+            .faculty-hero h1 {
+                font-size: 1.3rem;
+            }
+
+            .faculty-hero p {
+                font-size: 0.85rem;
+            }
+
+            .faculty-card img {
+                height: 150px;
+            }
+
+            .faculty-info {
+                padding: 8px;
+            }
+
+            .faculty-name {
+                font-size: 1rem;
+            }
+
+            .faculty-position {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            .faculty-hero h1 {
+                font-size: 1.3rem;
+            }
+
+            .faculty-hero p {
+                font-size: 0.85rem;
+            }
+
+            .faculty-card img {
+                height: 150px;
+            }
+
+            .faculty-info {
+                padding: 8px;
+            }
+
+            .faculty-name {
+                font-size: 1rem;
+            }
+
+            .faculty-position {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Desktop nav */
+        nav ul {
+            display: flex;
+            /* always visible on desktop */
+            gap: 20px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hamburger hidden on desktop */
+        #hamburger {
+            display: none;
+            font-size: 28px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+
+            /* Hamburger visible */
+            #hamburger {
+                display: block;
+            }
+
+            /* Hide menu by default */
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                margin-top: 10px;
+                background-color: #1a3db6;
+                padding: 10px 0;
+            }
+
+            /* Show menu when active */
+            nav ul.active {
+                display: flex;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
+    <header>
+        <div class="header-container">
+            <!-- Left: Logo + College Name -->
             <div class="logo">
-                <img src="images/college-logo.png" alt="SNSCT Logo" width="50">
-                <h1>SNSCT Portal</h1>
+                <img src="./images/college logo.png" alt="College Logo">
+                <h1>SCE Portal</h1>
             </div>
-            <nav class="navbar">
+            <div id="hamburger">&#9776;</div> <!-- Hamburger icon -->
+
+
+            <!-- Right: Navigation -->
+            <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="admissions.html">Admissions</a></li>
                     <li><a href="academics.html">Academics</a></li>
-                    <li><a href="student-life.html">Student Life</a></li>
-                    <li class="active"><a href="faculty-staff.html">Faculty & Staff</a></li>
+                    <li><a href="tie-ups.html">Tie-Up</a></li>
+                    <li><a href="faculty-staff.html">Faculty & Staff</a></li>
                     <li><a href="alumni.html">Alumni</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -180,187 +504,27 @@
         </div>
     </header>
 
-    <!-- Faculty & Staff Hero Section -->
+
     <section class="faculty-hero">
-        <div class="container">
-            <h1>Our Distinguished Faculty & Staff</h1>
-            <p>Meet our team of accomplished educators and dedicated administrative professionals</p>
-        </div>
+        <h1>Our Distinguished Faculty & Staff</h1>
+        <p>Meet the academic and administrative pillars of our institution</p>
     </section>
 
-    <!-- Faculty Section -->
-    <section class="faculty-section">
-        <div class="container">
-            <h2 class="section-title">Teaching Faculty</h2>
-            
-            <!-- Computer Science Department -->
-            <div class="department-section">
-                <h3 class="department-title">Computer Science Department</h3>
-                <div class="faculty-grid">
-                    <div class="faculty-card">
-                        <div class="faculty-img-container">
-                           <img src="https://thispersondoesnotexist.com/" alt="Professor John Smith" class="staff-img">
-                        </div>
-                        <div class="faculty-info">
-                            <h3 class="faculty-name">Dr. John Smith</h3>
-                            <p class="faculty-position">Professor & HOD</p>
-                            <p class="faculty-qualification">PhD in Computer Science, Stanford University</p>
-                            <p class="faculty-expertise">Expertise: Artificial Intelligence, Machine Learning</p>
-                            <a href="faculty-profile.html?id=jsmith" class="btn btn-outline">View Profile</a>
-                        </div>
-                    </div>
-                    
-                    <div class="faculty-card">
-                        <div class="faculty-img-container">
-                             <img src="https://thispersondoesnotexist.com/" alt="Professor Sarah Johnson" class="staff-img">
-                        </div>
-                        <div class="faculty-info">
-                            <h3 class="faculty-name">Dr. Sarah Johnson</h3>
-                            <p class="faculty-position">Associate Professor</p>
-                            <p class="faculty-qualification">PhD in Data Science, MIT</p>
-                            <p class="faculty-expertise">Expertise: Big Data Analytics, Cloud Computing</p>
-                            <a href="faculty-profile.html?id=sjohnson" class="btn btn-outline">View Profile</a>
-                        </div>
-                    </div>
-                    
-                    <div class="faculty-card">
-                        <div class="faculty-img-container">
-                                <img src="https://thispersondoesnotexist.com/" alt="Professor Michael Chen" class="staff-img">
-                        </div>
-                        <div class="faculty-info">
-                            <h3 class="faculty-name">Prof. Michael Chen</h3>
-                            <p class="faculty-position">Assistant Professor</p>
-                            <p class="faculty-qualification">MS in Software Engineering, Carnegie Mellon</p>
-                            <p class="faculty-expertise">Expertise: Software Development, Cybersecurity</p>
-                            <a href="faculty-profile.html?id=mchen" class="btn btn-outline">View Profile</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Electronics Department -->
-            <div class="department-section">
-                <h3 class="department-title">Electronics & Communication</h3>
-                <div class="faculty-grid">
-                    <div class="faculty-card">
-                        <div class="faculty-img-container">
-                             <img src="https://thispersondoesnotexist.com/" alt="Professor Priya Sharma" class="staff-img">
-                        </div>
-                        <div class="faculty-info">
-                            <h3 class="faculty-name">Dr. Priya Sharma</h3>
-                            <p class="faculty-position">Professor & HOD</p>
-                            <p class="faculty-qualification">PhD in Electronics, IIT Delhi</p>
-                            <p class="faculty-expertise">Expertise: VLSI Design, Embedded Systems</p>
-                            <a href="faculty-profile.html?id=psharma" class="btn btn-outline">View Profile</a>
-                        </div>
-                    </div>
-                    
-                    <div class="faculty-card">
-                        <div class="faculty-img-container">
-                            <img src="images/faculty/rajesh-kumar.jpg" alt="Dr. Rajesh Kumar" class="faculty-img">
-                        </div>
-                        <div class="faculty-info">
-                            <h3 class="faculty-name">Dr. Rajesh Kumar</h3>
-                            <p class="faculty-position">Associate Professor</p>
-                            <p class="faculty-qualification">PhD in Communication Systems, NIT Trichy</p>
-                            <p class="faculty-expertise">Expertise: Wireless Communication, 5G Networks</p>
-                            <a href="faculty-profile.html?id=rkumar" class="btn btn-outline">View Profile</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- View All Faculty Button -->
-            <div class="text-center">
-                <a href="faculty-directory.html" class="btn btn-primary">View All Faculty Members</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Staff Section -->
-    <section class="staff-section bg-light">
-        <div class="container">
-            <h2 class="section-title">Administrative Staff</h2>
-            
-            <div class="staff-list">
-                <div class="staff-card">
-                    <h3>Robert Wilson</h3>
-                    <p class="staff-position">Registrar</p>
-                    <p><i class="fas fa-envelope"></i> registrar@snsct.edu</p>
-                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
-                </div>
-                
-                <div class="staff-card">
-                    <h3>Jennifer Adams</h3>
-                    <p class="staff-position">Dean of Students</p>
-                    <p><i class="fas fa-envelope"></i> dean.students@snsct.edu</p>
-                    <p><i class="fas fa-phone"></i> +91 98765 43211</p>
-                </div>
-                
-                <div class="staff-card">
-                    <h3>David Miller</h3>
-                    <p class="staff-position">Head Librarian</p>
-                    <p><i class="fas fa-envelope"></i> library@snsct.edu</p>
-                    <p><i class="fas fa-phone"></i> +91 98765 43212</p>
-                </div>
-                
-                <div class="staff-card">
-                    <h3>Lisa Thompson</h3>
-                    <p class="staff-position">Admissions Officer</p>
-                    <p><i class="fas fa-envelope"></i> admissions@snsct.edu</p>
-                    <p><i class="fas fa-phone"></i> +91 98765 43213</p>
-                </div>
-                
-                <div class="staff-card">
-                    <h3>Mark Davis</h3>
-                    <p class="staff-position">IT Department Head</p>
-                    <p><i class="fas fa-envelope"></i> it.support@snsct.edu</p>
-                    <p><i class="fas fa-phone"></i> +91 98765 43214</p>
-                </div>
-                
-                <div class="staff-card">
-                    <h3>Sarah Johnson</h3>
-                    <p class="staff-position">HR Manager</p>
-                    <p><i class="fas fa-envelope"></i> hr@snsct.edu</p>
-                    <p><i class="fas fa-phone"></i> +91 98765 43215</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="container" id="facultyContainer"></div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="admissions.html">Admissions</a></li>
-                        <li><a href="academics.html">Academics</a></li>
-                        <li><a href="faculty-staff.html">Faculty & Staff</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 College Road, Coimbatore</p>
-                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
-                    <p><i class="fas fa-envelope"></i> info@snsct.edu</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Follow Us</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2024 SNS College of Technology. All Rights Reserved.</p>
-            </div>
+    <!-- Modal -->
+    <div class="modal" id="facultyModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalName"></h2>
+            <p><strong>Department:</strong> <span id="modalDept"></span></p>
+            <p><strong>Role:</strong> <span id="modalRole"></span></p>
+            <p><strong>Subjects Taken:</strong> <span id="modalSubjects"></span></p>
         </div>
-    </footer>
+    </div>
+
+    <script src="faculty-staff.js" defer></script>
 </body>
+
 </html>

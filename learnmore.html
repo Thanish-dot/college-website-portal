@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Department Details</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background: #f0f2f5;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h2 {
+      font-size: 2.5rem;
+      color: #002f7a;
+    }
+
+    .card p {
+      color: #555;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #2e66e5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1c4dcc;
+    }
+
+    .details {
+      display: none;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+      padding: 30px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .details h3 {
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .details ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .details li {
+      margin-bottom: 8px;
+      padding-left: 10px;
+    }
+
+    .images {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .images img {
+      width: 180px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    /* ================= Media Queries ================= */
+
+/* Large screens */
+@media (max-width: 1200px) {
+  .card {
+    width: 220px;
+  }
+  .details {
+    max-width: 750px;
+    padding: 25px;
+  }
+  .images img {
+    width: 150px;
+    height: 100px;
+  }
+}
+
+/* Medium screens / tablets */
+@media (max-width: 992px) {
+  .card {
+    width: 200px;
+    padding: 15px;
+  }
+  .card h2 {
+    font-size: 2rem;
+  }
+  .card p {
+    font-size: 0.9rem;
+  }
+  .details {
+    max-width: 650px;
+    padding: 20px;
+  }
+  .images img {
+    width: 130px;
+    height: 90px;
+  }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 90%;
+  }
+  .details {
+    max-width: 90%;
+    padding: 15px;
+  }
+  .images {
+    justify-content: center;
+  }
+  .images img {
+    width: 120px;
+    height: 80px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 576px) {
+  .card h2 {
+    font-size: 1.5rem;
+  }
+  .card p {
+    font-size: 0.85rem;
+  }
+  button {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+  .details h3 {
+    font-size: 1.2rem;
+  }
+  .details ul li {
+    font-size: 0.85rem;
+  }
+  .images img {
+    width: 100px;
+    height: 70px;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 400px) {
+  .card h2 {
+    font-size: 1.2rem;
+  }
+  .card p {
+    font-size: 0.8rem;
+  }
+  button {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+  .details h3 {
+    font-size: 1rem;
+  }
+  .details ul li {
+    font-size: 0.8rem;
+  }
+  .images img {
+    width: 80px;
+    height: 60px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+  <div class="card-container">
+    <div class="card">
+      <img src="./images/becse.jpg" alt="CSE">
+      <h2>CSE</h2>
+      <p>Computer Science & Engineering</p>
+      <button onclick="showDetails('cse')">Learn More</button>
+    </div>
+
+    <div class="card">
+      <img src="./images/beit.jpg" alt="IT">
+      <h2>IT</h2>
+      <p>Information Technology</p>
+      <button onclick="showDetails('it')">Learn More</button>
+    </div>
+
+    <div class="card">
+      <img src="./images/beece.jpg" alt="ECE">
+      <h2>ECE</h2>
+      <p>Electronics & Communication</p>
+      <button onclick="showDetails('ece')">Learn More</button>
+    </div>
+
+    <div class="card">
+      <img src="./images/beeee.png" alt="EEE">
+      <h2>EEE</h2>
+      <p>Electrical & Electronics</p>
+      <button onclick="showDetails('eee')">Learn More</button>
+    </div>
+
+    <div class="card">
+      <img src="./images/bemech.jpg" alt="MECH">
+      <h2>MECH</h2>
+      <p>Mechanical Engineering</p>
+      <button onclick="showDetails('mech')">Learn More</button>
+    </div>
+
+    <div class="card">
+      <img src="./images/memba.jpg" alt="MBA">
+      <h2>MBA</h2>
+      <p>Master of Business Admin</p>
+      <button onclick="showDetails('mba')">Learn More</button>
+    </div>
+  </div>
+
+  <!-- Details Sections -->
+  <div id="cse" class="details">
+    <img src="./images/becse.jpg" alt="CSE">
+    <h3>CSE Department</h3>
+    <ul>
+      <li><strong>Placements:</strong> 98% in Amazon, Google, Infosys</li>
+      <li><strong>Topper:</strong> Asha V. - 9.9 CGPA</li>
+      <li><strong>Recruiters:</strong> Zoho, HCL, Accenture</li>
+      <li><strong>Notices:</strong> Hackathon - Aug 20</li>
+    </ul>
+    <div class="images">
+      <img src="./images/cse.jpg" alt="Event 1">
+      <img src="./images/cse1.jpg" alt="Event 2">
+    </div>
+  </div>
+
+  <div id="it" class="details">
+    <img src="./images/beit.jpg" alt="IT">
+    <h3>IT Department</h3>
+    <ul>
+      <li><strong>Placements:</strong> 90% in Capgemini, TCS</li>
+      <li><strong>Topper:</strong> Praveen R - 9.7 CGPA</li>
+      <li><strong>Recruiters:</strong> Wipro, Infosys, Cognizant</li>
+      <li><strong>Notices:</strong> Tech Fest - Sep 10</li>
+    </ul>
+    <div class="images">
+      <img src="./images/it.jpg" alt="Event 1">
+      <img src="./images/it1.jpg" alt="Event 2">
+    </div>
+  </div>
+
+  <div id="ece" class="details">
+    <img src="./images/beece.jpg" alt="ECE">
+    <h3>ECE Department</h3>
+    <ul>
+      <li><strong>Placements:</strong> 85% in Qualcomm, Bosch</li>
+      <li><strong>Topper:</strong> Divya M - 9.5 CGPA</li>
+      <li><strong>Recruiters:</strong> Nokia, Siemens, Samsung</li>
+      <li><strong>Notices:</strong> VLSI Workshop - Sep 22</li>
+    </ul>
+    <div class="images">
+      <img src="./images/ece.jpg" alt="Event 1">
+      <img src="./images/ece1.jpg" alt="Event 2">
+    </div>
+  </div>
+
+  <div id="eee" class="details">
+    <img src="./images/beeee.png" alt="EEE">
+    <h3>EEE Department</h3>
+    <ul>
+      <li><strong>Placements:</strong> 80% in PowerGrid, NTPC</li>
+      <li><strong>Topper:</strong> Saran N - 9.6 CGPA</li>
+      <li><strong>Recruiters:</strong> BHEL, Tata Power</li>
+      <li><strong>Notices:</strong> Energy Expo - Oct 5</li>
+    </ul>
+    <div class="images">
+      <img src="./images/eee.jpg" alt="Event 1">
+      <img src="./images/eee1.jpg" alt="Event 2">
+    </div>
+  </div>
+
+  <div id="mech" class="details">
+    <img src="./images/bemech.jpg" alt="MECH">
+    <h3>MECH Department</h3>
+    <ul>
+      <li><strong>Placements:</strong> 75% in Ashok Leyland, L&T</li>
+      <li><strong>Topper:</strong> Vignesh P - 9.4 CGPA</li>
+      <li><strong>Recruiters:</strong> Mahindra, TVS</li>
+      <li><strong>Notices:</strong> Auto Expo - Oct 15</li>
+    </ul>
+    <div class="images">
+      <img src="./images/mech.jpg" alt="Event 1">
+      <img src="./images/mech1.jpg" alt="Event 2">
+    </div>
+  </div>
+
+  <div id="mba" class="details">
+    <img src="./images/memba.jpg" alt="MBA">
+    <h3>MBA Department</h3>
+    <ul>
+      <li><strong>Placements:</strong> 92% in Deloitte, EY, KPMG</li>
+      <li><strong>Topper:</strong> Fatima S - 9.8 CGPA</li>
+      <li><strong>Recruiters:</strong> HDFC, SBI, Infosys</li>
+      <li><strong>Notices:</strong> Business Meet - Nov 3</li>
+    </ul>
+    <div class="images">
+      <img src="./images/mba.jpg" alt="Event 1">
+      <img src="./images/mba1.jpg" alt="Event 2">
+    </div>
+  </div>
+
+  <script>
+    function showDetails(deptId) {
+      const allSections = document.querySelectorAll('.details');
+      allSections.forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(deptId).style.display = 'block';
+    }
+  </script>
+
+</body>
+
+</html>

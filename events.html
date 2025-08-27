@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events & Research</title>
+  <style>
+    /* Animated Gradient Background */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      min-height: 100vh;
+
+      /* Transparent gradient overlay + background image */
+      background-image: linear-gradient(-45deg, rgba(30, 58, 138, 0.6), rgba(59, 130, 246, 0.6), rgba(109, 213, 250, 0.6), rgba(255, 255, 255, 0.3)),
+        url('./images/techfest.jpg');
+
+      background-size: 400% 400%, cover;
+      background-repeat: no-repeat, no-repeat;
+      background-position: center center, center center;
+
+      /* Animate only the gradient layer */
+      animation: gradientBG 12s ease infinite;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%, center center;
+      }
+
+      50% {
+        background-position: 100% 50%, center center;
+      }
+
+      100% {
+        background-position: 0% 50%, center center;
+      }
+    }
+
+
+    /* Main wrapper to align card & content side by side */
+    .main-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      width: 280px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-header {
+      padding: 30px;
+      color: #fff;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .techfest {
+      background-color: #1e3a8a;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-body h3 {
+      margin-top: 0;
+      color: #1e3a8a;
+      font-size: 1.1em;
+    }
+
+    .card-body p {
+      color: #555;
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+
+    .card-body button {
+      margin-top: 15px;
+      padding: 10px 18px;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .card-body button:hover {
+      background-color: #2563eb;
+    }
+
+    /* Content display area - initially hidden */
+    #content-area {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      max-width: 350px;
+      min-width: 250px;
+      display: none;
+    }
+
+    .event-item {
+      background: #f1f5ff;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+    }
+    /* ================= Media Queries ================= */
+
+/* Large tablets / small desktops */
+@media (max-width: 1200px) {
+    body {
+        padding: 30px;
+    }
+
+    .card {
+        width: 250px;
+    }
+
+    #content-area {
+        max-width: 300px;
+        min-width: 200px;
+    }
+}
+
+/* Medium tablets */
+@media (max-width: 992px) {
+    body {
+        padding: 25px;
+    }
+
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    #content-area {
+        max-width: 90%;
+        min-width: unset;
+    }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .card-header {
+        font-size: 1.3em;
+        padding: 20px;
+    }
+
+    .card-body h3 {
+        font-size: 1em;
+    }
+
+    .card-body p {
+        font-size: 0.85em;
+    }
+
+    .card-body button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 576px) {
+    body {
+        padding: 15px;
+    }
+
+    .card-header {
+        font-size: 1.1em;
+        padding: 15px;
+    }
+
+    .card-body h3 {
+        font-size: 0.95em;
+    }
+
+    .card-body p {
+        font-size: 0.8em;
+    }
+
+    .card-body button {
+        padding: 7px 12px;
+        font-size: 0.85em;
+    }
+
+    #content-area {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 400px) {
+    .card-header {
+        font-size: 1em;
+        padding: 12px;
+    }
+
+    .card-body h3 {
+        font-size: 0.9em;
+    }
+
+    .card-body p {
+        font-size: 0.75em;
+    }
+
+    .card-body button {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+
+    body {
+        padding: 10px;
+    }
+}
+
+  </style>
+</head>
+
+<body>
+
+  <div class="main-container">
+    <!-- Tech Fest Card -->
+    <div class="card">
+      <div class="card-header techfest">Tech Fest</div>
+      <div class="card-body">
+        <h3>Annual Tech Fest</h3>
+        <p>Join us for our biggest technology festival with workshops, competitions and more.</p>
+        <button onclick="showEvents()">View Details</button>
+      </div>
+    </div>
+
+    <!-- Dynamic Content Area -->
+    <div id="content-area"></div>
+  </div>
+     <script src="events.js" defer></script>
+</body>
+
+</html>

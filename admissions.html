@@ -1,27 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNSCT College Portal - Admissions</title>
+    <title>SCE College Portal - Admissions</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        section.hero {
+
+            /* REPLACE THIS WITH YOUR IMAGE */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./images/admission.jpg');
+            /* <-- Your image here */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 8rem 0;
+            margin-bottom: 2rem;
+            /* Rest remains the same */
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h2 {
+            animation: slideUpFadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .hero p {
+            animation: slideUpFadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .btn-container {
+            animation: slideUpFadeIn 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes cardEntry {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .card {
+            animation: cardEntry 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* ================== Media Queries ================== */
+
+        /* Large tablets / small desktops */
+        @media (max-width: 1200px) {
+            .hero {
+                padding: 6rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .card-container {
+                gap: 20px;
+            }
+
+            .card-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .card-content p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Medium tablets */
+        @media (max-width: 992px) {
+            .hero {
+                padding: 5rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .card-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .card-content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Small tablets / large phones */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding-top: 10px;
+            }
+
+            .hero {
+                padding: 4.5rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .card-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .admission-steps>div {
+                flex: 1 1 100%;
+                margin-bottom: 15px;
+            }
+
+            .admission-steps div div {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Mobile phones */
+        @media (max-width: 576px) {
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.8rem;
+            }
+
+            .card-content h3 {
+                font-size: 1rem;
+            }
+
+            .card-content p {
+                font-size: 0.8rem;
+            }
+
+            .admission-steps div div {
+                width: 35px;
+                height: 35px;
+                font-size: 0.8rem;
+            }
+
+            .admission-steps h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 400px) {
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .hero p {
+                font-size: 0.75rem;
+            }
+
+            .card-content h3 {
+                font-size: 0.95rem;
+            }
+
+            .card-content p {
+                font-size: 0.7rem;
+            }
+
+            .admission-steps h3 {
+                font-size: 1rem;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .hero p {
+                font-size: 0.75rem;
+            }
+
+            .card-content h3 {
+                font-size: 0.95rem;
+            }
+
+            .card-content p {
+                font-size: 0.7rem;
+            }
+
+            .admission-steps h3 {
+                font-size: 1rem;
+            }
+        }
+
+        /* Desktop: show nav normally, hide hamburger */
+        nav ul {
+            display: flex;
+            gap: 23px;
+        }
+
+        #hamburger {
+            display: none;
+        }
+
+        /* Hide the checkbox */
+        #menu-toggle {
+            display: none;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            #hamburger {
+                display: block;
+                font-size: 28px;
+                color: #fff;
+                cursor: pointer;
+                margin-left: auto;
+            }
+
+            nav ul {
+                display: none;
+                /* hide menu by default */
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            /* Show menu when checkbox is checked */
+            #menu-toggle:checked~nav ul {
+                display: flex;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <!-- Header -->
     <header>
         <div class="container header-container">
+
             <div class="logo">
-                <img src="https://placehold.co/50x50/1e40af/FFFFFF?text=SNS" alt="SNSCT Logo">
-                <h1>SNSCT Portal</h1>
+                <img src="./images/college logo.png" alt="SCE Logo">
+                <h1>SCE Portal</h1>
             </div>
+            <!-- Hidden checkbox -->
+            <input type="checkbox" id="menu-toggle" />
+
+            <!-- Hamburger icon -->
+            <label for="menu-toggle" id="hamburger">&#9776;</label>
+
+
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="admissions.html" class="active">Admissions</a></li>
                     <li><a href="academics.html">Academics</a></li>
-                    <li><a href="student-life.html">Student Life</a></li>
+                    <li><a href="achievements.html">Achievements</a></li>
+                    <li><a href="tie-ups.html">Tie-Up</a></li>
                     <li><a href="faculty-staff.html">Faculty & Staff</a></li>
                     <li><a href="alumni.html">Alumni</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
@@ -33,8 +346,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h2>Admissions at SNSCT</h2>
-            <p>Begin your journey to academic excellence with SNS College of Technology.</p>
+            <h2>Admissions at SCE</h2>
+            <p>Begin your journey to academic excellence with Stravion College of Engineering.</p>
         </div>
     </section>
 
@@ -42,7 +355,7 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">Admission Process</h2>
-            
+
             <div class="card-container">
                 <div class="card">
                     <div class="card-content">
@@ -50,14 +363,16 @@
                         <p>Our B.Tech programs offer cutting-edge education in various engineering disciplines.</p>
                         <ul>
                             <li>Computer Science Engineering</li>
+                            <li>Information Technology Engineering</li>
                             <li>Electronics & Communication</li>
+                            <li>Electrical & Electronics Engineering</li>
                             <li>Mechanical Engineering</li>
                             <li>Civil Engineering</li>
                         </ul>
-                        <a href="#" class="btn">Apply Now</a>
+                        <a href="admissionprocess.html" class="btn">Apply Now</a>
                     </div>
                 </div>
-                
+
                 <div class="card">
                     <div class="card-content">
                         <h3>Postgraduate Programs</h3>
@@ -68,31 +383,39 @@
                             <li>MBA in Business Analytics</li>
                             <li>MBA in Digital Marketing</li>
                         </ul>
-                        <a href="#" class="btn">Apply Now</a>
+                        <a href="admissionprocess.html" class="btn">Apply Now</a>
                     </div>
                 </div>
             </div>
-            
+
             <div class="admission-steps" style="margin-top: 40px;">
                 <h3 style="text-align: center; margin-bottom: 20px;">Admission Procedure</h3>
                 <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
                     <div style="flex: 1; min-width: 200px; text-align: center; padding: 20px;">
-                        <div style="background-color: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">1</div>
+                        <div
+                            style="background-color: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">
+                            1</div>
                         <h4>Application</h4>
                         <p>Submit your application online or offline</p>
                     </div>
                     <div style="flex: 1; min-width: 200px; text-align: center; padding: 20px;">
-                        <div style="background-color: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">2</div>
+                        <div
+                            style="background-color: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">
+                            2</div>
                         <h4>Entrance Exam</h4>
                         <p>Appear for the required entrance examination</p>
                     </div>
                     <div style="flex: 1; min-width: 200px; text-align: center; padding: 20px;">
-                        <div style="background-color: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">3</div>
+                        <div
+                            style="background-color: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">
+                            3</div>
                         <h4>Counselling</h4>
                         <p>Participate in the admission counselling</p>
                     </div>
                     <div style="flex: 1; min-width: 200px; text-align: center; padding: 20px;">
-                        <div style="background-color: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">4</div>
+                        <div
+                            style="background-color: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">
+                            4</div>
                         <h4>Admission</h4>
                         <p>Complete documentation and fee payment</p>
                     </div>
@@ -106,8 +429,9 @@
         <div class="container">
             <div class="footer-container">
                 <div class="footer-column">
-                    <h3>About SNSCT</h3>
-                    <p>SNS College of Technology is committed to providing quality education and fostering innovation.</p>
+                    <h3>About SCE</h3>
+                    <p>Stravion College of Engineering is committed to providing quality education and fostering
+                        innovation.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -136,14 +460,15 @@
                 <div class="footer-column">
                     <h3>Contact Us</h3>
                     <p><i class="fas fa-map-marker-alt"></i> 123 College Road, Coimbatore</p>
-                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
-                    <p><i class="fas fa-envelope"></i> info@snsct.edu</p>
+                    <p><i class="fas fa-phone"></i> +91 63xxxxxx28</p>
+                    <p><i class="fas fa-envelope"></i> info@sce.edu</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2024 SNS College of Technology. All Rights Reserved.</p>
+                <p>&copy; 2025 Stravion College of Engineering. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 </body>
+
 </html>

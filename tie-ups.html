@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tie-Up Companies — College Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #071129;
+      --bg-2: #0f2536;
+      --card: rgba(255, 255, 255, 0.04);
+      --accent: #ffd24d;
+      --muted: rgba(255, 255, 255, 0.75);
+      --glass: rgba(255, 255, 255, 0.03);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      color: #fff;
+      background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    }
+
+    header {
+      padding: 40px 20px 10px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+      backdrop-filter: blur(4px);
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      margin: 0 0 8px;
+      font-weight: 800;
+      letter-spacing: 0.5px
+    }
+
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 28px 20px;
+    }
+
+    .search {
+      width: 420px;
+      max-width: calc(100% - 40px);
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      outline: none;
+      color: #fff;
+      font-size: 1rem;
+      box-shadow: 0 3px 18px rgba(2, 8, 23, 0.6) inset;
+    }
+
+    .search::placeholder {
+      color: rgba(255, 255, 255, 0.6)
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .chip.active {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--accent);
+      border-color: rgba(255, 255, 255, 0.12)
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 20px 80px
+    }
+
+    /* grid */
+    .grid {
+      display: grid;
+      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      align-items: start;
+    }
+
+    /* card */
+    .company {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 24px 18px;
+      transition: transform .28s ease, box-shadow .28s ease, background .2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 260px;
+      /* equal-ish heights */
+      box-shadow: 0 6px 18px rgba(2, 8, 23, 0.6);
+    }
+
+    .company.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    .company:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.055);
+      box-shadow: 0 18px 40px rgba(2, 8, 23, 0.7);
+    }
+
+    .logo {
+      width: 140px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .name {
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      font-size: 1.05rem;
+      margin: 6px 0
+    }
+
+    .desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 14px;
+      padding: 0 6px
+    }
+
+    .meta {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      justify-content: center;
+      margin-top: auto
+    }
+
+    .meta a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      background: transparent;
+      font-weight: 600
+    }
+
+    .meta a.visit {
+      color: var(--accent);
+      border-color: rgba(255, 210, 77, 0.08)
+    }
+
+    /* small placeholder style if image fails */
+    .fallback {
+      width: 120px;
+      height: 48px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #1b2940, #102235);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    /* animations */
+    .company {
+      opacity: 0;
+      transform: translateY(26px) scale(.995)
+    }
+
+    .company.show {
+      opacity: 1;
+      transform: translateY(0) scale(1)
+    }
+
+    /* responsive tweaks */
+    @media (max-width:700px) {
+      header h1 {
+        font-size: 1.9rem
+      }
+
+      .search {
+        width: 86%
+      }
+
+      .logo {
+        width: 120px;
+        height: 64px
+      }
+    }
+
+    /* ================= Media Queries ================= */
+
+    /* Medium screens (tablets) */
+    @media (max-width: 992px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 0.95rem;
+      }
+
+      .controls {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .search {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .filters {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      main {
+        padding: 24px 16px 60px;
+      }
+    }
+
+    /* Small screens (mobiles) */
+    @media (max-width: 576px) {
+      header {
+        padding: 30px 12px 8px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      header p {
+        font-size: 0.9rem;
+      }
+
+      .search {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+      }
+
+      .filters {
+        gap: 6px;
+      }
+
+      .chip {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+      }
+
+      .company {
+        padding: 18px 12px;
+        min-height: auto;
+      }
+
+      .logo {
+        width: 100px;
+        height: 60px;
+        margin-bottom: 10px;
+      }
+
+      .name {
+        font-size: 0.95rem;
+      }
+
+      .desc {
+        font-size: 0.85rem;
+        padding: 0 4px;
+      }
+
+      .meta a {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+      }
+
+      /* Hamburger icon styling */
+      #hamburger {
+        display: block;
+        font-size: 28px;
+        color: #fff;
+        cursor: pointer;
+        margin-left: auto;
+      }
+
+      /* Hide nav menu by default on mobile */
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      /* Show menu when active */
+      nav ul.active {
+        display: flex;
+      }
+
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 18px;
+        white-space: nowrap;
+        transition: 0.3s;
+      }
+
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    /* Small screens (mobiles) */
+    @media (max-width: 480px) {
+      header {
+        padding: 30px 12px 8px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      header p {
+        font-size: 0.9rem;
+      }
+
+      .search {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+      }
+
+      .filters {
+        gap: 6px;
+      }
+
+      .chip {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+      }
+
+      .company {
+        padding: 18px 12px;
+        min-height: auto;
+      }
+
+      .logo {
+        width: 100px;
+        height: 60px;
+        margin-bottom: 10px;
+      }
+
+      .name {
+        font-size: 0.95rem;
+      }
+
+      .desc {
+        font-size: 0.85rem;
+        padding: 0 4px;
+      }
+
+      .meta a {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+      }
+    }
+
+    /* Small screens (mobiles) */
+    @media (max-width: 400px) {
+      header {
+        padding: 30px 12px 8px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      header p {
+        font-size: 0.9rem;
+      }
+
+      .search {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+      }
+
+      .filters {
+        gap: 6px;
+      }
+
+      .chip {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+      }
+
+      .company {
+        padding: 18px 12px;
+        min-height: auto;
+      }
+
+      .logo {
+        width: 100px;
+        height: 60px;
+        margin-bottom: 10px;
+      }
+
+      .name {
+        font-size: 0.95rem;
+      }
+
+      .desc {
+        font-size: 0.85rem;
+        padding: 0 4px;
+      }
+
+      .meta a {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <header>
+    <div class="header-container">
+      <h1>Our Tie-Up Companies</h1>
+      <p>Industry partners who mentor, hire and collaborate with our students</p>
+      <div id="hamburger">&#9776;</div> <!-- Hamburger icon -->
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="academics.html" class="active">Academics</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="tie-ups.html">Tie-Up</a></li>
+          <li><a href="faculty-staff.html">Faculty & Staff</a></li>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="controls">
+    <input id="search" class="search" placeholder="Search companies by name (e.g. TCS, Amazon)..."
+      aria-label="Search companies">
+    <div class="filters" aria-hidden="true">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="it">IT</button>
+      <button class="chip" data-filter="manufacturing">Manufacturing</button>
+      <button class="chip" data-filter="consulting">Consulting</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="grid" id="grid" aria-live="polite"></section>
+  </main>
+
+
+  <script src="tie-ups.js" defer></script>
+</body>
+
+</html>

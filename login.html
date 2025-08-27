@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - SCE Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            color: #1a3db6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header */
+        header {
+            background-color: #1a3db6;
+            padding: 13px 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .logo-text span:first-child {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo-text span:last-child {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 23px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: opacity 0.3s;
+        }
+
+        nav ul li a:hover {
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        nav ul li a.active {
+            font-weight: 800;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Main Content Area */
+        main,
+        .main-content {
+            padding: 40px 20px;
+            min-height: 70vh;
+            /* Ensures footer is pushed down */
+        }
+
+        main h2,
+        .main-content h2 {
+            font-size: 2.2rem;
+            color: #1a3db6;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #1a3db6;
+            padding-bottom: 10px;
+        }
+
+        /* Calendar Page Styles */
+        .calendar-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .calendar-list li {
+            background-color: #ffffff;
+            border-left: 5px solid #1a3db6;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Library Page Styles */
+        .book-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .book-card {
+            width: 180px;
+            text-align: center;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .book-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .book-card strong {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .library-form {
+            margin-top: 30px;
+            padding: 25px;
+            background: #eef2f9;
+            border-radius: 8px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .library-form h3 {
+            margin-bottom: 15px;
+            color: #1a3db6;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        #confirmation-message {
+            margin-top: 15px;
+            color: #28a745;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Login Page Styles */
+        .form-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 30px 40px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        form label {
+            display: block;
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        .library-form input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        form input:focus,
+        .library-form input:focus {
+            outline: none;
+            border-color: #1a3db6;
+            box-shadow: 0 0 0 2px rgba(26, 61, 182, 0.2);
+        }
+
+        form button,
+        .library-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a3db6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover,
+        .library-form button:hover {
+            background-color: #142e8e;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0d1d5a;
+            color: #ccc;
+            padding: 40px 0 20px 0;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .footer-column h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #3b82f6;
+            padding-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #334155;
+            margin-top: 30px;
+            padding-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 40px 12px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            border-color: #1a3db6;
+            box-shadow: 0 0 5px rgba(26, 61, 182, 0.5);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* ================= Media Queries ================= */
+
+        /* Large screens */
+        @media (max-width: 1200px) {
+            .form-container {
+                padding: 25px 30px;
+            }
+        }
+
+        /* Medium screens / tablets */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .form-container {
+                width: 80%;
+                padding: 20px;
+            }
+        }
+
+        /* Small tablets / large phones */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .logo-text span:first-child {
+                font-size: 20px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 15px;
+            }
+
+            .form-container {
+                width: 90%;
+                padding: 18px;
+            }
+
+            form input,
+            .input-group input,
+            form button {
+                font-size: 0.95rem;
+                padding: 10px;
+            }
+        }
+
+        /* Mobile phones */
+        @media (max-width: 576px) {
+            .form-container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            form input,
+            .input-group input {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            .toggle-password {
+                font-size: 14px;
+                right: 10px;
+            }
+
+            form button {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 400px) {
+            .form-container h2 {
+                font-size: 1.5rem;
+            }
+
+            form input,
+            .input-group input,
+            form button {
+                font-size: 0.85rem;
+                padding: 7px;
+            }
+
+            .logo img {
+                height: 35px;
+                width: 35px;
+            }
+
+            .logo-text span:first-child {
+                font-size: 18px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 14px;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            .form-container h2 {
+                font-size: 1.5rem;
+            }
+
+            form input,
+            .input-group input,
+            form button {
+                font-size: 0.85rem;
+                padding: 7px;
+            }
+
+            .logo img {
+                height: 35px;
+                width: 35px;
+            }
+
+            .logo-text span:first-child {
+                font-size: 18px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 14px;
+            }
+        }
+
+        /* Desktop nav */
+        nav ul {
+            display: flex;
+            /* always visible on desktop */
+            gap: 20px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hamburger hidden on desktop */
+        #hamburger {
+            display: none;
+            font-size: 28px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+
+            /* Hamburger visible */
+            #hamburger {
+                display: block;
+            }
+
+            /* Hide menu by default */
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                margin-top: 10px;
+                background-color: #1a3db6;
+                padding: 10px 0;
+            }
+
+            /* Show menu when active */
+            nav ul.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="./images/college logo.png" alt="SCE Logo" />
+                <div class="logo-text">
+                    <span>SCE</span>
+                    <span>Portal</span>
+                </div>
+            </div>
+            <div id="hamburger">&#9776;</div> <!-- Hamburger icon -->
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Admissions</a></li>
+                    <li><a href="#">Academics</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="library.html">Library</a></li>
+                    <li><a href="login.html" class="active">Student Login</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Student Login</h2>
+            <form id="loginForm">
+                <input type="text" id="fullName" placeholder="Enter Name" required><br><br>
+
+                <input type="text" id="rollNumber" placeholder="Enter Roll No (e.g., 21CSE021)" required><br><br>
+
+                <input type="date" id="dob" required><br><br>
+
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Enter 6-digit Password" maxlength="6"
+                        pattern="\d{6}" required>
+                    <span class="toggle-password" onclick="togglePassword()">👁</span>
+                </div>
+
+
+                <button type="submit">Login</button>
+            </form>
+
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>About SCE</h3>
+                    <p>Stravion College of Engineering is committed to providing quality education and fostering
+                        innovation.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Admissions</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="library.html">Library</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p>123 College Road, Coimbatore</p>
+                    <p>+91 63xxxxxx28</p>
+                    <p>info@sce.edu</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Stravion College of Engineering. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <div id="studentOutput"></div>
+    <script src="login.js" defer></script>
+
+</body>
+
+</html>

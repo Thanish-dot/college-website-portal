@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Library - SCE Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #f4f7fc;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background-color: #1a3db6;
+      padding: 15px 25px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      color: #fff;
+    }
+
+    .logo-text span:first-child {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo-text span:last-child {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 23px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    nav ul li a.active {
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      padding: 40px 20px;
+    }
+
+    .main-content h2 {
+      font-size: 2.2rem;
+      color: #1a3db6;
+      margin-bottom: 25px;
+      border-bottom: 3px solid #1a3db6;
+      padding-bottom: 10px;
+    }
+
+    /* Library Page Styles */
+    .book-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .book-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .book-card {
+      width: 180px;
+      text-align: center;
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease-in-out;
+      /* Smoother transition */
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+    }
+
+    .book-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .book-card strong {
+      font-size: 1rem;
+      color: #333;
+      flex-grow: 1;
+    }
+
+    /* ========== NEW STYLES FOR THE LOCKED STATE ========== */
+    .book-gallery.locked .book-card {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .book-gallery.locked .book-card:hover {
+      transform: none;
+      /* Disable hover effect when locked */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .book-gallery.locked .book-link {
+      pointer-events: none;
+      /* This disables the link's clickability */
+    }
+
+    /* ========== END OF NEW STYLES ========== */
+
+    .library-form {
+      margin-top: 30px;
+      padding: 25px;
+      background: #eef2f9;
+      border-radius: 8px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .library-form h3 {
+      margin-bottom: 15px;
+      color: #1a3db6;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    .library-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .library-form input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .library-form button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1a3db6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #confirmation-message {
+      margin-top: 15px;
+      color: #28a745;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0d1d5a;
+      color: #ccc;
+      padding: 40px 0 20px 0;
+      margin-top: 40px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .footer-column h3 {
+      color: #fff;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #3b82f6;
+      padding-bottom: 10px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-column a:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* ================= Media Queries ================= */
+
+    /* Large screens */
+    @media (max-width: 1200px) {
+      .book-card {
+        width: 160px;
+      }
+
+      .book-card img {
+        height: 200px;
+      }
+    }
+
+    /* Medium screens / tablets */
+    @media (max-width: 992px) {
+      .book-card {
+        width: 140px;
+        padding: 12px;
+      }
+
+      .book-card img {
+        height: 180px;
+      }
+
+      .library-form {
+        max-width: 500px;
+        padding: 20px;
+      }
+    }
+
+    /* Small tablets / large phones */
+    @media (max-width: 768px) {
+      .book-gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .book-card {
+        width: 80%;
+      }
+
+      .book-card img {
+        height: 180px;
+      }
+
+      .library-form {
+        width: 90%;
+        padding: 15px;
+      }
+    }
+
+    /* Mobile phones */
+    @media (max-width: 576px) {
+
+      .book-card h2,
+      .book-card strong {
+        font-size: 0.9rem;
+      }
+
+      .book-card img {
+        height: 150px;
+      }
+
+      .library-form button {
+        font-size: 1rem;
+        padding: 10px;
+      }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 400px) {
+      .book-card img {
+        height: 120px;
+      }
+
+      .book-card {
+        padding: 10px;
+      }
+
+      .library-form input,
+      .library-form button {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 480px) {
+      .book-card img {
+        height: 120px;
+      }
+
+      .book-card {
+        padding: 10px;
+      }
+
+      .library-form input,
+      .library-form button {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Desktop nav */
+    nav ul {
+      display: flex;
+      /* always visible on desktop */
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Hamburger hidden on desktop */
+    #hamburger {
+      display: none;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+
+      /* Hamburger visible */
+      #hamburger {
+        display: block;
+      }
+
+      /* Hide menu by default */
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+        background-color: #1a3db6;
+        padding: 10px 0;
+      }
+
+      /* Show menu when active */
+      nav ul.active {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <img src="./images/college logo.png" alt="SCE Logo" />
+        <div class="logo-text"><span>SCE</span><span>Portal</span></div>
+      </div>
+      <div id="hamburger">&#9776;</div> <!-- Hamburger icon -->
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="academics.html">Academics</a></li>
+          <li><a href="calendar.html">Calendar</a></li>
+          <li><a href="library.html" class="active">Library</a></li>
+          <li><a href="login.html">Student Login</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <h2>Digital Library - Available Books</h2>
+      <div class="book-gallery locked">
+
+        <a href="https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_to_Python_Programming_-_WEB.pdf"
+          class="book-link" title="View Book: Python 101" target="_blank">
+          <div class="book-card">
+            <img src="./images/python101.jpg" alt="Python 101">
+            <strong>Python 101</strong>
+          </div>
+        </a>
+
+        <a href="https://www.dcpehvpm.org/E-Content/BCA/BCA-II/Web%20Technology/the-complete-reference-html-css-fifth-edition.pdf"
+          class="book-link" title="View Book: HTML & CSS Guide" target="_blank">
+          <div class="book-card">
+            <img src="./images/hc.jpg" alt="Web Design">
+            <strong>HTML & CSS Guide</strong>
+          </div>
+        </a>
+
+        <a href="https://alex.smola.org/drafts/thebook.pdf" class="book-link" title="View Book: Intro to ML"
+          target="_blank">
+          <div class="book-card">
+            <img src="./images/ml.jpg" alt="Machine Learning">
+            <strong>Intro to ML</strong>
+          </div>
+        </a>
+
+        <a href="https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2014/12/CS403-1.10-Database-Design-2nd-Edition-CCBY.pdf"
+          class="book-link" title="View Book: Database Design" target="_blank">
+          <div class="book-card">
+            <img src="./images/db.jpg" alt="Databases">
+            <strong>Database Design</strong>
+          </div>
+        </a>
+
+        <a href="https://staff.um.edu.mt/__data/assets/pdf_file/0010/57169/jn.pdf" class="book-link"
+          title="View Book: Java Basics" target="_blank">
+          <div class="book-card">
+            <img src="./images/jb.jpg" alt="Java Basics">
+            <strong>Java Basics</strong>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="library-form">
+        <h3>Request Book Softcopy</h3>
+        <form id="bookRequestForm">
+          <label for="rollNo">Enter Your Roll Number to Unlock Books:</label>
+          <input type="text" id="rollNo" placeholder="e.g., 22CS001" required>
+          <button type="submit">Request Softcopy</button>
+        </form>
+        <p id="confirmation-message" style="display:none;"></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>About SCE</h3>
+          <p>Stravion College of Engineering is committed to providing quality education and fostering innovation.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="calendar.html">Calendar</a></li>
+            <li><a href="library.html">Library</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <p> Kalvi Nagar, Kurichi, Coimbatore, Tamil Nadu 641048</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("bookRequestForm").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevents the form from actually submitting
+      const rollNo = document.getElementById("rollNo").value;
+      const messageEl = document.getElementById("confirmation-message");
+
+      if (rollNo) {
+        // Show confirmation message
+        messageEl.textContent = `Thank you! The library is now unlocked for Roll No: ${rollNo}.`;
+        messageEl.style.display = 'block';
+
+        // ========== JAVASCRIPT LOGIC CHANGED HERE ==========
+        // Find the book gallery
+        const bookGallery = document.querySelector('.book-gallery');
+        // Unlock the books by removing the 'locked' class
+        bookGallery.classList.remove('locked');
+        // ===================================================
+      }
+    });
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('nav ul');
+
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+
+  </script>
+
+</body>
+
+</html>
