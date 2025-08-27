@@ -471,6 +471,22 @@
                 display: flex;
             }
         }
+
+        /* Make calendar responsive on small screens */
+        @media (max-width: 576px) {
+            .calendar-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 3px;
+                /* keeps small gaps */
+            }
+
+            .day-cell {
+                min-height: 60px;
+                /* already defined, keep */
+                font-size: 0.65rem;
+                /* already defined */
+            }
+        }
     </style>
 </head>
 
